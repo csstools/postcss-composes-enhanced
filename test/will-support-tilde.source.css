@@ -1,0 +1,3 @@
+.test-composes-at-rule {
+	@composes no-margin from "~layout";
+}

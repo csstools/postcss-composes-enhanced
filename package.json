@@ -1,0 +1,155 @@
+{
+  "name": "postcss-composes-enhanced",
+  "version": "1.0.0",
+  "description": "Enhance the composes behavior in CSS Modules",
+  "author": "Jonathan Neal <jonathantneal@hotmail.com>",
+  "license": "CC0-1.0",
+  "repository": "csstools/postcss-composes-enhanced",
+  "homepage": "https://github.com/csstools/postcss-composes-enhanced#readme",
+  "bugs": "https://github.com/csstools/postcss-composes-enhanced/issues",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.cjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "dependencies": {
+    "css-import-resolve": "^1.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "coverage-node": "^2.0.3",
+    "eslint": "^7.2.0",
+    "postcss": "^7.0.32",
+    "rollup": "^2.15.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-copy": "^3.3.0"
+  },
+  "peerDependencies": {
+    "postcss": "^7"
+  },
+  "keywords": [
+    "postcss",
+    "postcss-plugin",
+    "advanced",
+    "at",
+    "at-rule",
+    "at-rules",
+    "atrule",
+    "atrules",
+    "behavior",
+    "behaviors",
+    "compose-with",
+    "compose",
+    "composes",
+    "css",
+    "css-module",
+    "css-modules",
+    "cssmodule",
+    "cssmodules",
+    "declaration",
+    "declarations",
+    "enhanced",
+    "extend",
+    "extends",
+    "icss",
+    "icss-module",
+    "icss-modules",
+    "icssmodule",
+    "module",
+    "modules",
+    "properties",
+    "property",
+    "rule",
+    "rules"
+  ],
+  "babel": {
+    "presets": [
+      [
+        "@babel/env",
+        {
+          "targets": "maintained node versions"
+        }
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "sourceType": "module"
+    }
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "endOfLine": "lf",
+    "printWidth": 120,
+    "semi": false,
+    "singleQuote": true,
+    "useTabs": true,
+    "overrides": [
+      {
+        "files": "*.{json,md,yml}",
+        "options": {
+          "useTabs": false
+        }
+      }
+    ]
+  },
+  "rollup": {
+    "input": "src/index.js",
+    "plugins": [
+      "rollup-plugin-babel",
+      [
+        "rollup-plugin-copy",
+        {
+          "targets": [
+            {
+              "src": "./src/index.d.ts",
+              "dest": "./dist",
+              "rename": "index.cjs.d.ts"
+            },
+            {
+              "src": "./src/index.d.ts",
+              "dest": "./dist",
+              "rename": "index.mjs.d.ts"
+            }
+          ]
+        }
+      ]
+    ],
+    "output": [
+      {
+        "file": "dist/index.cjs",
+        "format": "cjs",
+        "strict": false
+      },
+      {
+        "file": "dist/index.mjs",
+        "format": "esm",
+        "strict": false
+      }
+    ]
+  },
+  "scripts": {
+    "build": "rollup -c .rollup.js",
+    "build:watch": "rollup -c .rollup.js --watch",
+    "coverage": "coverage-node test/index.js",
+    "lint": "eslint --cache src",
+    "lint:fix": "eslint --cache --fix",
+    "pretest": "npm run build",
+    "test": "npm run lint && npm run coverage"
+  }
+}
